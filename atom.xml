@@ -1,0 +1,513 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>惜别的博客</title>
+  
+  <subtitle>惜别的秘密基地</subtitle>
+  <link href="https://sekibetu.com/atom.xml" rel="self"/>
+  
+  <link href="https://sekibetu.com/"/>
+  <updated>2021-03-22T13:50:46.265Z</updated>
+  <id>https://sekibetu.com/</id>
+  
+  <author>
+    <name>SekiBetu</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>主流开源协议的选择</title>
+    <link href="https://sekibetu.com/license01.html"/>
+    <id>https://sekibetu.com/license01.html</id>
+    <published>2021-03-22T13:07:41.000Z</published>
+    <updated>2021-03-22T13:50:46.265Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;&lt;a</summary>
+        
+      
+    
+    
+    
+    
+    <category term="License" scheme="https://sekibetu.com/tags/License/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>国际版抖音TikTok非Root改区观看方法(截止2021年3月2日有效)</title>
+    <link href="https://sekibetu.com/tiktok01.html"/>
+    <id>https://sekibetu.com/tiktok01.html</id>
+    <published>2021-03-02T15:09:21.000Z</published>
+    <updated>2021-03-22T13:47:42.436Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;国际版抖音TikTok非Root改区观看方法&quot;&gt;&lt;a href=&quot;#国际版抖音TikTok非Root改区观看方法&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    
+    <category term="TikTok" scheme="https://sekibetu.com/tags/TikTok/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>v2ray中DNS运作流程</title>
+    <link href="https://sekibetu.com/xray01.html"/>
+    <id>https://sekibetu.com/xray01.html</id>
+    <published>2020-12-23T17:19:05.000Z</published>
+    <updated>2020-12-23T17:43:19.512Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;本文为摘选，仅作为备忘录使用&lt;/p&gt;
+&lt;p&gt;以以下路由配置为例&lt;/p&gt;
+&lt;pre class=&quot;language-json&quot; data-language=&quot;json&quot;&gt;&lt;code class=&quot;language-json&quot;&gt;&lt;span class=&quot;token</summary>
+        
+      
+    
+    
+    
+    
+    <category term="v2ray" scheme="https://sekibetu.com/tags/v2ray/"/>
+    
+    <category term="DNS" scheme="https://sekibetu.com/tags/DNS/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>SpringCloud 移除了大量 Netflix 的包</title>
+    <link href="https://sekibetu.com/springcloud02.html"/>
+    <id>https://sekibetu.com/springcloud02.html</id>
+    <published>2020-12-23T12:46:39.000Z</published>
+    <updated>2020-12-23T17:39:16.312Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;刚用了 Hystrix</summary>
+        
+      
+    
+    
+    
+    
+    <category term="SpringCloud" scheme="https://sekibetu.com/tags/SpringCloud/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Telegram 被嫖秃了</title>
+    <link href="https://sekibetu.com/tg01.html"/>
+    <id>https://sekibetu.com/tg01.html</id>
+    <published>2020-12-23T10:50:52.000Z</published>
+    <updated>2021-03-22T13:47:42.368Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;12月23日，Telegram 之父 Pavel Durov 在他的个人频道发布了一则关于 Telegram 将要推出收费功能的&lt;a href=&quot;https://t.me/durov/142&quot;&gt;通知&lt;/a&gt;，全文如下：&lt;/p&gt;
+&lt;p&gt;&lt;img</summary>
+        
+      
+    
+    
+    
+    
+    <category term="Telegram" scheme="https://sekibetu.com/tags/Telegram/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>什么是Hash算法加盐</title>
+    <link href="https://sekibetu.com/salt01.html"/>
+    <id>https://sekibetu.com/salt01.html</id>
+    <published>2020-12-16T12:15:08.000Z</published>
+    <updated>2020-12-17T14:52:49.000Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;以下是一个典型的Hash算法加盐思路：&lt;/p&gt;
+&lt;pre class=&quot;language-none&quot;&gt;&lt;code</summary>
+        
+      
+    
+    
+    
+    
+    <category term="Hash" scheme="https://sekibetu.com/tags/Hash/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>FastDFS笔记01</title>
+    <link href="https://sekibetu.com/fastdfs01.html"/>
+    <id>https://sekibetu.com/fastdfs01.html</id>
+    <published>2020-12-13T13:43:27.000Z</published>
+    <updated>2020-12-18T05:17:37.527Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;随手记点笔记，不全，自用&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;fastdfs01/fastdfs01.pdf&quot;&gt;本文思维导图(PDF)&lt;/a&gt; &lt;/p&gt;
+&lt;p&gt;&lt;a</summary>
+        
+      
+    
+    
+    
+    
+    <category term="fastdfs" scheme="https://sekibetu.com/tags/fastdfs/"/>
+    
+    <category term="分布式" scheme="https://sekibetu.com/tags/%E5%88%86%E5%B8%83%E5%BC%8F/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>ElasticSearch笔记02(自用)</title>
+    <link href="https://sekibetu.com/elasticsearch02.html"/>
+    <id>https://sekibetu.com/elasticsearch02.html</id>
+    <published>2020-11-25T16:38:13.000Z</published>
+    <updated>2020-12-17T14:52:49.000Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;随手记点笔记，不全，自用&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;elasticsearch02/elasticsearch02.pdf&quot;&gt;本文思维导图(PDF)&lt;/a&gt; &lt;/p&gt;
+&lt;p&gt;&lt;a</summary>
+        
+      
+    
+    
+    
+    
+    <category term="ElasticSearch" scheme="https://sekibetu.com/tags/ElasticSearch/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>ElasticSearch笔记(自用)</title>
+    <link href="https://sekibetu.com/elasticsearch01.html"/>
+    <id>https://sekibetu.com/elasticsearch01.html</id>
+    <published>2020-11-23T14:21:06.000Z</published>
+    <updated>2020-12-17T14:52:49.000Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;随手记点笔记，不全，自用&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;elasticsearch01/elasticsearch01.pdf&quot;&gt;本文思维导图(PDF)&lt;/a&gt; &lt;/p&gt;
+&lt;p&gt;&lt;a</summary>
+        
+      
+    
+    
+    
+    
+    <category term="ElasticSearch" scheme="https://sekibetu.com/tags/ElasticSearch/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>个人使用过的git命令记录</title>
+    <link href="https://sekibetu.com/git01.html"/>
+    <id>https://sekibetu.com/git01.html</id>
+    <published>2020-11-22T21:06:42.000Z</published>
+    <updated>2021-03-22T13:47:42.537Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h3 id=&quot;经常忘记git命令，所以开始记录遇到过的命令，方便自己查阅&quot;&gt;&lt;a href=&quot;#经常忘记git命令，所以开始记录遇到过的命令，方便自己查阅&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    
+    <category term="git" scheme="https://sekibetu.com/tags/git/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Docker笔记(自用)</title>
+    <link href="https://sekibetu.com/docker01.html"/>
+    <id>https://sekibetu.com/docker01.html</id>
+    <published>2020-11-17T14:33:16.000Z</published>
+    <updated>2020-12-17T14:52:49.000Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;随手记点笔记，不全，自用&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;docker01/docker01.pdf&quot;&gt;本文思维导图(PDF)&lt;/a&gt; &lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;docker01/docker01.xmind&quot;&gt;本文思维导图(xmind)&lt;/a&gt;&lt;/p&gt;
+&lt;h1</summary>
+        
+      
+    
+    
+    
+    
+    <category term="Docker" scheme="https://sekibetu.com/tags/Docker/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>SpringCloud笔记(自用)</title>
+    <link href="https://sekibetu.com/springcloud01.html"/>
+    <id>https://sekibetu.com/springcloud01.html</id>
+    <published>2020-11-10T16:54:54.000Z</published>
+    <updated>2020-12-17T14:52:49.000Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;随手记点笔记，不全，自用&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;springcloud01/springcloud01.pdf&quot;&gt;本文思维导图(pdf)&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a</summary>
+        
+      
+    
+    
+    
+    
+    <category term="SpringCloud" scheme="https://sekibetu.com/tags/SpringCloud/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>rabbitMQ笔记(自用)</title>
+    <link href="https://sekibetu.com/rabbitmq01.html"/>
+    <id>https://sekibetu.com/rabbitmq01.html</id>
+    <published>2020-10-28T16:42:12.000Z</published>
+    <updated>2020-12-17T14:52:49.000Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;随手记点笔记，不全，自用&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;rabbitMQ01/RabbitMQ01.pdf&quot;&gt;本文思维导图(PDF)&lt;/a&gt; &lt;/p&gt;
+&lt;p&gt;&lt;a</summary>
+        
+      
+    
+    
+    
+    
+    <category term="rabbitMQ" scheme="https://sekibetu.com/tags/rabbitMQ/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>尝试解决某些商家VPS的断流问题</title>
+    <link href="https://sekibetu.com/vps01.html"/>
+    <id>https://sekibetu.com/vps01.html</id>
+    <published>2020-10-21T19:06:43.000Z</published>
+    <updated>2020-12-17T14:52:49.000Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;缘起&quot;&gt;&lt;a href=&quot;#缘起&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    
+    <category term="VPS" scheme="https://sekibetu.com/tags/VPS/"/>
+    
+    <category term="BBR" scheme="https://sekibetu.com/tags/BBR/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>redis笔记02(自用)</title>
+    <link href="https://sekibetu.com/redis02.html"/>
+    <id>https://sekibetu.com/redis02.html</id>
+    <published>2020-10-10T15:09:23.000Z</published>
+    <updated>2020-12-17T14:52:49.000Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;随手记点笔记，不全，自用&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;redis02/Redis02.pdf&quot;&gt;本文思维导图(PDF)&lt;/a&gt; &lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;redis02/Redis02.xmind&quot;&gt;本文思维导图(xmind)&lt;/a&gt;&lt;/p&gt;
+&lt;h2</summary>
+        
+      
+    
+    
+    
+    
+    <category term="redis" scheme="https://sekibetu.com/tags/redis/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>mybatis如何获取刚刚插入数据的ID</title>
+    <link href="https://sekibetu.com/mybatis01.html"/>
+    <id>https://sekibetu.com/mybatis01.html</id>
+    <published>2020-09-04T06:34:25.000Z</published>
+    <updated>2020-12-17T14:52:49.000Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;​    有时业务逻辑中需要获取刚刚插入的数据的自增ID值以用于后续使用，mybatis提供了 LAST_INSERT_ID() 函数获取该ID值：&lt;/p&gt;
+&lt;pre class=&quot;language-xml&quot; data-language=&quot;xml&quot;&gt;&lt;code</summary>
+        
+      
+    
+    
+    
+    
+    <category term="mybatis" scheme="https://sekibetu.com/tags/mybatis/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>redis笔记(自用)</title>
+    <link href="https://sekibetu.com/redis01.html"/>
+    <id>https://sekibetu.com/redis01.html</id>
+    <published>2020-08-01T07:24:34.000Z</published>
+    <updated>2020-12-17T14:52:49.000Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;Redis&quot;&gt;&lt;a href=&quot;#Redis&quot; class=&quot;headerlink&quot; title=&quot;Redis&quot;&gt;&lt;/a&gt;Redis&lt;/h2&gt;&lt;p&gt;Redis: &lt;strong&gt;Re&lt;/strong&gt;mote</summary>
+        
+      
+    
+    
+    
+    
+    <category term="redis" scheme="https://sekibetu.com/tags/redis/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>mysql事物隔离级别笔记</title>
+    <link href="https://sekibetu.com/mysql01.html"/>
+    <id>https://sekibetu.com/mysql01.html</id>
+    <published>2020-07-18T06:11:17.000Z</published>
+    <updated>2020-12-17T14:52:49.000Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th align=&quot;center&quot;&gt;隔离级别&lt;/th&gt;
+&lt;th align=&quot;center&quot;&gt;脏读（Dirty Read）&lt;/th&gt;
+&lt;th align=&quot;center&quot;&gt;不可重复读（NonRepeatable</summary>
+        
+      
+    
+    
+    
+    
+    <category term="mysql" scheme="https://sekibetu.com/tags/mysql/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>调整Windows系统TCP协议参数实现网络加速</title>
+    <link href="https://sekibetu.com/win10tcp.html"/>
+    <id>https://sekibetu.com/win10tcp.html</id>
+    <published>2020-07-05T14:02:26.000Z</published>
+    <updated>2020-12-23T11:36:56.525Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;可以直接下载软件修改，无需使用命令行：&quot;&gt;&lt;a href=&quot;#可以直接下载软件修改，无需使用命令行：&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    
+    <category term="WIN10" scheme="https://sekibetu.com/tags/WIN10/"/>
+    
+    <category term="网络" scheme="https://sekibetu.com/tags/%E7%BD%91%E7%BB%9C/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Linux常用命令英语全称(自用)</title>
+    <link href="https://sekibetu.com/linux01.html"/>
+    <id>https://sekibetu.com/linux01.html</id>
+    <published>2020-07-02T07:32:04.000Z</published>
+    <updated>2020-12-17T14:52:49.000Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;ar命令-–-建立或修改备存文件&quot;&gt;&lt;a href=&quot;#ar命令-–-建立或修改备存文件&quot; class=&quot;headerlink&quot; title=&quot;ar命令 – 建立或修改备存文件&quot;&gt;&lt;/a&gt;ar命令 –</summary>
+        
+      
+    
+    
+    
+    
+    <category term="Linux" scheme="https://sekibetu.com/tags/Linux/"/>
+    
+  </entry>
+  
+</feed>

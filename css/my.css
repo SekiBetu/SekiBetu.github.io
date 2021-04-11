@@ -1,0 +1,18 @@
+/* Here is your custom css styles. */
+@font-face{
+    font-family: 'Sarasa Mono Slab SC';
+    src: url('../font/sarasa-mono-slab-sc-regular.ttf');
+}
+
+body{
+    font-family: 'Sarasa Mono Slab SC';
+}
+
+@font-face{
+    font-family: 'JetBrains Mono';
+    src: url('../font/JetBrainsMono-Regular.ttf');
+}
+
+.diyFont{
+    font-family: 'JetBrains Mono';
+}
