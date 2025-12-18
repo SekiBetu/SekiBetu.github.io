@@ -1,0 +1,365 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="dark"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>惜别的秘密基地</title><meta name="author" content="SekiBetu"><meta name="copyright" content="SekiBetu"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#0d0d0d"><meta name="description" content="记录与分享各种东西">
+<meta property="og:type" content="website">
+<meta property="og:title" content="惜别的秘密基地">
+<meta property="og:url" content="https://sekibetu.com/index.html">
+<meta property="og:site_name" content="惜别的秘密基地">
+<meta property="og:description" content="记录与分享各种东西">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://sekibetu.com/img/SekiBetu.png">
+<meta property="article:author" content="SekiBetu">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://sekibetu.com/img/SekiBetu.png"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "惜别的秘密基地",
+  "alternateName": [
+    "sekibetu.com"
+  ],
+  "url": "https://sekibetu.com/"
+}</script><link rel="shortcut icon" href="/favicon.ico"><link rel="canonical" href="https://sekibetu.com/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.3"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar@0.1.16/dist/snackbar.min.css" media="print" onload="this.media='all'"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!true && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><link rel="stylesheet" href="/font/JetBrainsMonoNL-Regular.ttf" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":true},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: {"chs_to_cht":"已切换为繁体中文","cht_to_chs":"已切换为简体中文","day_to_night":"已切换为深色模式","night_to_day":"已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#1f1f1f","position":"bottom-left"},
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.12.0/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '惜别的秘密基地',
+  isHighlightShrink: false,
+  isToc: false,
+  pageType: 'home'
+}</script><meta name="generator" content="Hexo 8.1.1"><link rel="alternate" href="/atom.xml" title="惜别的秘密基地" type="application/atom+xml">
+</head><body><div class="bg-animation" id="web_bg" style="background-image: url(/img/67861832_p0.jpg);"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/SekiBetu.png" onerror="this.onerror=null;this.src='/img/Starfetcher.jpg'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">18</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">27</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div></div></div></div><div class="page" id="body-wrap"><header class="full_page" id="page-header" style="background-image: url(/img/67861832_p0.jpg);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">惜别的秘密基地</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="site-info"><h1 id="site-title">惜别的秘密基地</h1><div id="site-subtitle"><span id="subtitle"></span></div><div id="site_social_icons"><a class="social-icon" href="https://twitter.com/_SekiBetu_" target="_blank" title="Twitter"><i class="fab fa-twitter"></i></a><a class="social-icon" href="mailto:realsekibetu@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="https://sekibetu.com/atom.xml" target="_blank" title="RSS"><i class="fas fa-rss"></i></a></div></div><div id="scroll-down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><main class="layout" id="content-inner"><div class="recent-posts nc" id="recent-posts"><div class="recent-post-items"><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/linus01.html" title="对Linux社区封禁俄罗斯开发者且linus本人支持这一行为的评价">对Linux社区封禁俄罗斯开发者且linus本人支持这一行为的评价</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-10-24T13:54:15.000Z" title="发表于 2024-10-24 21:54:15">2024-10-24</time><span class="article-meta-separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-09-16T15:34:20.000Z" title="更新于 2025-09-16 23:34:20">2025-09-16</time></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/Linux/">Linux</a></span></div><div class="content">这件事确实引发了广泛的争议，值得我们深入思考。Linus Torvalds作为开源界的领军人物，他的行为无疑会在全球范围内产生影响。他决定封禁俄罗斯开发者的账号，表面上看，似乎是对俄罗斯在乌克兰问题上采取的立场和行动作出回应，表达了某种政治立场。然而，这一做法却引起了开源社区的强烈反弹，主要是因为开源社区一向强调全球合作、技术无国界的精神。 我们必须承认，乌克兰战争是一个非常复杂的国际事件，它牵动着全球舆论，很多国家和个人对此都有立场和情感。然而，将政治因素引入技术领域，特别是开源这种基于全球协作的项目中，难免会导致更多的分歧和对立。封禁俄罗斯开发者不仅可能影响开源项目的质量和进展，还可能破坏开源社区的包容性，甚至削弱这一技术领域长期以来形成的多边合作机制。 从现实出发，制裁和封禁措施本身或许能够带来短期的压力，但从长远来看，技术的进步和创新依赖于跨国界的协作与共享。开源世界的成功正是因为它超越了政治、种族和国界，为全世界的开发者提供了一个平等的舞台。将某个国家的开发者排除在外，不仅是在打击个体的贡献，更是对全球技术生态的破坏。 因此，我认为Linus的这一决定虽然在当前的国际形...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/followis.html" title="三分钟，让Follow认证我的Hexo博客订阅源">三分钟，让Follow认证我的Hexo博客订阅源</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-10-14T12:04:50.000Z" title="发表于 2024-10-14 20:04:50">2024-10-14</time><span class="article-meta-separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-09-16T15:34:20.000Z" title="更新于 2025-09-16 23:34:20">2025-09-16</time></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/Hexo/">Hexo</a><span class="article-meta-link">•</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/RSS/">RSS</a></span></div><div class="content">书接上回： https://sekibetu.com/rss01.html 通过Follow认证十分简单，首先在Follow上获得需要认证的暗号   此处我选择最简单的修改插件模版的方式，我使用的是atom模版，所以修改atom.xml  随便找个地方把暗号插入即可  完成后再次部署，查看网站的RSS订阅是否已经存在这个暗号了  完成后按下Follow里的认证，无内鬼，暗号正确，就通过了  </div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/rss01.html" title="给 Hexo 博客加上 PubSubHubbub 协议实现 RSS 实时推送">给 Hexo 博客加上 PubSubHubbub 协议实现 RSS 实时推送</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-06-29T21:55:05.000Z" title="发表于 2022-06-30 05:55:05">2022-06-30</time><span class="article-meta-separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-09-16T15:34:20.000Z" title="更新于 2025-09-16 23:34:20">2025-09-16</time></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/RSS/">RSS</a></span></div><div class="content">第一步  安装 hexo-generator-feed 插件  1npm install hexo-generator-feed 第二步  在 Hexo 博客配置文件 _config.yml 中配置上述插件的 hub 项为 Google PubSubHubbub Hub  12feed:  hub: https://pubsubhubbub.appspot.com 第三步  在部署 Hexo 静态博客的相关站点设置 Webhook, 此处以 GitHub 为例, 在站点仓库新建一个 Webhook    Payload URL 的填写格式为  1234https://pubsubhubbub.appspot.com/publish?hub.mode=publish&amp;hub.url=站点RSS链接# 以本站为例https://pubsubhubbub.appspot.com/publish?hub.mode=publish&amp;hub.url=https://sekibetu.com/atom.xml  Content type 选择 application/x-www...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/sniff01.html" title="抓取安卓端FGO游戏数据并导入素材规划软件Chaldea教程(需解锁BootLoader)">抓取安卓端FGO游戏数据并导入素材规划软件Chaldea教程(需解锁BootLoader)</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-06-08T11:58:22.000Z" title="发表于 2022-06-08 19:58:22">2022-06-08</time><span class="article-meta-separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-09-16T15:34:20.000Z" title="更新于 2025-09-16 23:34:20">2025-09-16</time></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/Fiddler/">Fiddler</a><span class="article-meta-link">•</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/Android/">Android</a><span class="article-meta-link">•</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/HTTPS/">HTTPS</a><span class="article-meta-link">•</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/FGO/">FGO</a><span class="article-meta-link">•</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/mitmproxy/">mitmproxy</a></span></div><div class="content">更新 Android 12 系统之后，证书不让安装为 root 证书了，SSL Pinning 也来了，老办法抓不到数据了，于是经过一番摸索，写下了本文，本文理论上适用于所有 APP，不仅仅是 FGO 第一步   参照以下文章安装 Magisk   https://sekibetu.com/magisk01.html   第二步   参照以下文章的第二步，在 Magisk 中刷入对应 Zygisk 版本的 LSPosed 框架   https://sekibetu.com/tiktok01.html   第三步   下载 MagiskTrustUserCerts 并在 Magisk 中刷入   重启手机   第四步  安装 JustTrustMe 模块(用来绕过 SSL Pinning)，并在 LSPosed 中启用，模块作用域指定为 FGO    第五步   下载安装 Fiddler Classic 或 mitmproxy   启动 Fiddler Classic 或 mitmproxy 并进行一些基础设置，以下是 Fiddler Classic 的基础设置， mitmprox...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/ssh01.html" title="SSH客户端简单对比">SSH客户端简单对比</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-06-07T14:37:06.000Z" title="发表于 2022-06-07 22:37:06">2022-06-07</time><span class="article-meta-separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-09-16T15:34:20.000Z" title="更新于 2025-09-16 23:34:20">2025-09-16</time></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/ssh/">ssh</a></span></div><div class="content">不采用横向对比，以缺点为主，优点仅为备注作用   OpenSSH  优点：开源，跨平台，各大系统默认集成，不需要安装 缺点：使用过程全靠手打命令行参数，SFTP 的使用繁琐 个人推荐度：⭐    PuTTY + WinSCP  优点：开源 缺点：界面丑，使用时 WinSCP 不能同步当前 PuTTY 所在目录 个人推荐度：⭐⭐    Termius  优点：跨平台，有手机端 缺点：商业闭源，SFTP 功能需付费 个人推荐度：⭐⭐    Visual Studio Code  优点：跨平台，易于编辑代码 缺点：终端界面过小，浏览服务器目录的方式逆天，需要频繁重新输入 passphrase 个人推荐度：⭐    Xshell  优点：功能齐全，支持 SFTP 缺点：商业闭源 个人推荐度：⭐⭐⭐    WindTerm  优点：跨平台，功能齐全，支持 SFTP，内存使用较少，使用流畅 缺点：逐渐开源 个人推荐度：⭐⭐⭐⭐    Electerm  优点：开源，跨平台，功能齐全，支持 SFTP，可查看服务器运行信息 缺点：内存使用较多，界面 UI 较为卡顿，不能使用本地编辑器打开文件，长...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/tiktok01.html" title="国际版抖音TikTok改区观看方法(需解锁BootLoader)">国际版抖音TikTok改区观看方法(需解锁BootLoader)</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-06-03T14:42:31.000Z" title="发表于 2022-06-03 22:42:31">2022-06-03</time><span class="article-meta-separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-09-16T15:34:20.000Z" title="更新于 2025-09-16 23:34:20">2025-09-16</time></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/Android/">Android</a><span class="article-meta-link">•</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/TikTok/">TikTok</a><span class="article-meta-link">•</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/Xposed/">Xposed</a></span></div><div class="content">第一步  参照以下文章安装 Magisk https://sekibetu.com/magisk01.html  第二步  在 Magisk 设置中启用 Zygisk (关于什么是 Zygisk 请看 这篇文章 和 这个公告 )    下载对应 Zygisk 的 LSPosed 版本并在 Magisk 中刷入，然后重启手机     第三步  安装 TikTok   第四步   安装可以修改手机 SIM 卡信息的相关模块( 应用变量、应用伪装、Thanox 等)，本文以 源计划 模块做演示   在 LSPosed 中激活上述模块并指定模块作用域为 TikTok     第五步  在 源计划 模块 APP 中搜索 TikTok 并进入详细设置界面    修改 SIM信息 中的 SIM厂商 、 SIM国际 和 SIM名称 (不同模块有不同的叫法)，将 SIM 卡伪装成非大陆 SIM 卡即可   第六步   修改手机的地区，以 MIUI 系统为例，进入 设置 —— 更多设置 —— 地区 ，设置成中国以外的国家或者地区   修改手机的时区，进入 设置 —— 更多设置 —— 日期和时间 ，关...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/magisk01.html" title="十分钟学会Magisk的安装">十分钟学会Magisk的安装</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-06-03T11:58:39.000Z" title="发表于 2022-06-03 19:58:39">2022-06-03</time><span class="article-meta-separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-09-16T15:34:20.000Z" title="更新于 2025-09-16 23:34:20">2025-09-16</time></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/Magisk/">Magisk</a><span class="article-meta-link">•</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/Android/">Android</a></span></div><div class="content">本文 PDF 版：magisk01.pdf Magisk 官方教程指路：https://topjohnwu.github.io/Magisk/install.html 本文仅为官方教程中最通用的一种方法的个人实践过程(Ramdisk、vbmeta 验证和三星手机的问题还请自行查阅上述官方教程) 食材准备：   手机一部，本文以 红米 K30Pro (MIUI 13 Android 12) 做演示   电脑一台，本文以 Windows 11 系统 做演示   USB 线一根   厨具准备：   Android SDK Platform-Tools   Google USB   Magisk   烹饪步骤：   通过小米官方的 解锁工具 解锁手机的 BootLoader (不同的厂商有不同的解锁方式，也有一些厂商不支持解锁 BootLoader)   把下载好的 Android SDK Platform-Tools 压缩包解压到一个文件夹中     【可选步骤】将上述文件夹的路径加入到系统环境变量以使 adb 、fastboot等程序能够在任意位置调用(如果不进行此处步骤，则下述步骤...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/v2ray01.html" title="v2ray中DNS运作流程">v2ray中DNS运作流程</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2020-12-23T17:19:05.000Z" title="发表于 2020-12-24 01:19:05">2020-12-24</time><span class="article-meta-separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-09-16T15:34:20.000Z" title="更新于 2025-09-16 23:34:20">2025-09-16</time></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/v2ray/">v2ray</a><span class="article-meta-link">•</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/DNS/">DNS</a></span></div><div class="content">本文为摘选，仅作为备忘录使用 以以下路由配置为例 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960&#123;  &quot;dns&quot;: &#123;    &quot;servers&quot;: [&quot;8.8.8.8&quot;, &quot;localhost&quot;]  &#125;,  &quot;outbounds&quot;: [    &#123;      &quot;protocol&quot;: &quot;vmess&quot;,      &quot;settings&quot;: &#123;        &quot;vnext&quot;: [          &#123;            &quot;users&quot;: [              &#123;                &quot;id&quot;: &quot;xx...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/salt01.html" title="什么是Hash算法加盐">什么是Hash算法加盐</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2020-12-16T12:15:08.000Z" title="发表于 2020-12-16 20:15:08">2020-12-16</time><span class="article-meta-separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-09-16T15:34:20.000Z" title="更新于 2025-09-16 23:34:20">2025-09-16</time></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/Hash/">Hash</a><span class="article-meta-link">•</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/Salt/">Salt</a></span></div><div class="content">以下是一个典型的 Hash 算法加盐思路： 1Hash算法(Hash算法(密码)+盐) 1、使用慢 Hash 算法可以拖延破解时间【重要】 2、使用和 Hash 函数输出的字符串等长的盐值，比如 SHA256 算法的输出是 256bits(32 bytes)，那么盐值也至少应该是 32 个随机字节【重要】 3、使用随机盐还是固定盐，取决于程序是否被泄露， 一般认为，数据库是第一个被泄露的，那么随机盐是直接被拿走了，而嵌入于程序中的固定盐是安全的； 但是，能入侵到数据库的黑客一般程序也顺手可以拿走了，所以固定盐反而降低了后续彩虹表的建立时间， 所以使用随机盐虽然免不了随机盐、密码和算法一起被泄露，但能增加彩虹表攻击的成本(每一个盐都需要建立一个彩虹表，能增加一丢丢破解时间) 我认为默认使用随机盐是好事，但是有些特殊情况下使用固定盐反而能取胜 </div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/git01.html" title="个人使用过的git命令记录">个人使用过的git命令记录</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2020-11-22T21:06:42.000Z" title="发表于 2020-11-23 05:06:42">2020-11-23</time><span class="article-meta-separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-09-16T15:34:20.000Z" title="更新于 2025-09-16 23:34:20">2025-09-16</time></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/git/">git</a></span></div><div class="content">经常忘记 git 命令，所以开始记录遇到过的命令，方便自己查阅  git 是 snapshot 式保存手段(每一次 commit 都是完整的 snapshot)，但又偏向于增量式保存，举例： 现有以下两个文件已成为第一次 commit A.txt B.txt 那么 git 会将其分为若干个 git 对象，并将这些对象进行切割后压缩保存(delta)， 当我修改了 A.txt，再次 commit 时， git 不会存储改动后的整个 A.txt， 而是存储一个指向 B.txt 的指针加上 A.txt 改动的部分，这些就是新增的 git 对象，git 接着将其按一定规则切割后压缩保存(delta) 总的来说，git 对象偏向于内容，而 delta 偏向于二进制分段压缩包， 每次 commit 的 delta 部分就像是彩虹六号 Y5S4 赛季这次更新的时候，游戏本体就 70G 左右，补丁却需要下载 60G， 因为彩虹六号把材质文件都封装进了 delta 文件，这类文件特别大，根目录下最大的单个材质包文件可达 28G，即使是改动了其中的一张图片，也需要整个重新下载,而 git 的包切得很...</div></div></div></div><nav id="pagination"><div class="pagination"><span class="page-number current">1</span><a class="page-number" href="/page/2/#content-inner">2</a><a class="extend next" rel="next" href="/page/2/#content-inner"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/SekiBetu.png" onerror="this.onerror=null;this.src='/img/Starfetcher.jpg'" alt="avatar"/></div><div class="author-info-name">SekiBetu</div><div class="author-info-description">记录与分享各种东西</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">18</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">27</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/SekiBetu"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://twitter.com/_SekiBetu_" target="_blank" title="Twitter"><i class="fab fa-twitter"></i></a><a class="social-icon" href="mailto:realsekibetu@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="https://sekibetu.com/atom.xml" target="_blank" title="RSS"><i class="fas fa-rss"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/linus01.html" title="对Linux社区封禁俄罗斯开发者且linus本人支持这一行为的评价">对Linux社区封禁俄罗斯开发者且linus本人支持这一行为的评价</a><time datetime="2024-10-24T13:54:15.000Z" title="发表于 2024-10-24 21:54:15">2024-10-24</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/followis.html" title="三分钟，让Follow认证我的Hexo博客订阅源">三分钟，让Follow认证我的Hexo博客订阅源</a><time datetime="2024-10-14T12:04:50.000Z" title="发表于 2024-10-14 20:04:50">2024-10-14</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/rss01.html" title="给 Hexo 博客加上 PubSubHubbub 协议实现 RSS 实时推送">给 Hexo 博客加上 PubSubHubbub 协议实现 RSS 实时推送</a><time datetime="2022-06-29T21:55:05.000Z" title="发表于 2022-06-30 05:55:05">2022-06-30</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/sniff01.html" title="抓取安卓端FGO游戏数据并导入素材规划软件Chaldea教程(需解锁BootLoader)">抓取安卓端FGO游戏数据并导入素材规划软件Chaldea教程(需解锁BootLoader)</a><time datetime="2022-06-08T11:58:22.000Z" title="发表于 2022-06-08 19:58:22">2022-06-08</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/ssh01.html" title="SSH客户端简单对比">SSH客户端简单对比</a><time datetime="2022-06-07T14:37:06.000Z" title="发表于 2022-06-07 22:37:06">2022-06-07</time></div></div></div></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>标签</span></div><div class="card-tag-cloud"><a href="/tags/UWP/" style="font-size: 1.1em; color: #999">UWP</a> <a href="/tags/Magisk/" style="font-size: 1.1em; color: #999">Magisk</a> <a href="/tags/Android/" style="font-size: 1.5em; color: #99a9bf">Android</a> <a href="/tags/Redis/" style="font-size: 1.3em; color: #99a1ac">Redis</a> <a href="/tags/MySQL/" style="font-size: 1.1em; color: #999">MySQL</a> <a href="/tags/Salt/" style="font-size: 1.1em; color: #999">Salt</a> <a href="/tags/Hexo/" style="font-size: 1.1em; color: #999">Hexo</a> <a href="/tags/DNS/" style="font-size: 1.1em; color: #999">DNS</a> <a href="/tags/Linux/" style="font-size: 1.1em; color: #999">Linux</a> <a href="/tags/%E5%85%89%E7%8C%AB/" style="font-size: 1.1em; color: #999">光猫</a> <a href="/tags/Windows/" style="font-size: 1.1em; color: #999">Windows</a> <a href="/tags/%E6%A1%A5%E6%8E%A5/" style="font-size: 1.1em; color: #999">桥接</a> <a href="/tags/HTTPS/" style="font-size: 1.1em; color: #999">HTTPS</a> <a href="/tags/v2ray/" style="font-size: 1.1em; color: #999">v2ray</a> <a href="/tags/TikTok/" style="font-size: 1.1em; color: #999">TikTok</a> <a href="/tags/Hash/" style="font-size: 1.1em; color: #999">Hash</a> <a href="/tags/RSS/" style="font-size: 1.3em; color: #99a1ac">RSS</a> <a href="/tags/mitmproxy/" style="font-size: 1.1em; color: #999">mitmproxy</a> <a href="/tags/git/" style="font-size: 1.1em; color: #999">git</a> <a href="/tags/MyBatis/" style="font-size: 1.1em; color: #999">MyBatis</a> <a href="/tags/%E5%8F%8D%E7%BC%96%E8%AF%91/" style="font-size: 1.1em; color: #999">反编译</a> <a href="/tags/Python3/" style="font-size: 1.1em; color: #999">Python3</a> <a href="/tags/ssh/" style="font-size: 1.1em; color: #999">ssh</a> <a href="/tags/Docker/" style="font-size: 1.1em; color: #999">Docker</a> <a href="/tags/Xposed/" style="font-size: 1.1em; color: #999">Xposed</a> <a href="/tags/Fiddler/" style="font-size: 1.3em; color: #99a1ac">Fiddler</a> <a href="/tags/FGO/" style="font-size: 1.1em; color: #999">FGO</a></div></div><div class="card-widget card-archives">
+    <div class="item-headline">
+      <i class="fas fa-archive"></i>
+      <span>归档</span>
+      <a class="card-more-btn" href="/archives/"
+            title="查看更多">
+            <i class="fas fa-angle-right"></i>
+          </a>
+    </div>
+  
+    <ul class="card-archive-list">
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2024/10/">
+            <span class="card-archive-list-date">
+              十月 2024
+            </span>
+            <span class="card-archive-list-count">2</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2022/06/">
+            <span class="card-archive-list-date">
+              六月 2022
+            </span>
+            <span class="card-archive-list-count">5</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2020/12/">
+            <span class="card-archive-list-date">
+              十二月 2020
+            </span>
+            <span class="card-archive-list-count">2</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2020/11/">
+            <span class="card-archive-list-date">
+              十一月 2020
+            </span>
+            <span class="card-archive-list-count">2</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2020/10/">
+            <span class="card-archive-list-date">
+              十月 2020
+            </span>
+            <span class="card-archive-list-count">1</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2020/09/">
+            <span class="card-archive-list-date">
+              九月 2020
+            </span>
+            <span class="card-archive-list-count">1</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2020/08/">
+            <span class="card-archive-list-date">
+              八月 2020
+            </span>
+            <span class="card-archive-list-count">1</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2020/07/">
+            <span class="card-archive-list-date">
+              七月 2020
+            </span>
+            <span class="card-archive-list-count">1</span>
+          </a>
+        </li>
+      
+    </ul>
+  </div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>网站信息</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章数目 :</div><div class="item-count">18</div></div><div class="webinfo-item"><div class="item-name">本站总字数 :</div><div class="item-count">13.3k</div></div><div class="webinfo-item"><div class="item-name">本站访客数 :</div><div class="item-count" id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">本站总浏览量 :</div><div class="item-count" id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">最后更新时间 :</div><div class="item-count" id="last-push-date" data-lastPushDate="2025-12-18T11:27:42.930Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer" style="background-image: url(/img/67861832_p0.jpg);"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2020 - 2025 By SekiBetu</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 8.1.1</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.3</a></span></div><div class="footer_custom_text"><a href="https://icp.gov.moe/?keyword=20213842" target="_blank">萌ICP备20213842号</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.3"></script><script src="/js/main.js?v=5.5.3"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar@0.1.16/dist/snackbar.min.js"></script><div class="js-pjax"><script>window.typedJSFn = {
+  init: str => {
+    window.typed = new Typed('#subtitle', Object.assign({
+      strings: str,
+      startDelay: 300,
+      typeSpeed: 150,
+      loop: true,
+      backSpeed: 50,
+    }, null))
+  },
+  run: subtitleType => {
+    if (true) {
+      if (typeof Typed === 'function') {
+        subtitleType()
+      } else {
+        btf.getScript('https://cdn.jsdelivr.net/npm/typed.js@2.1.0/dist/typed.umd.min.js').then(subtitleType)
+      }
+    } else {
+      subtitleType()
+    }
+  },
+  processSubtitle: (content, extraContents = []) => {
+    if (true) {
+      const sub = [].slice()
+
+      if (extraContents.length > 0) {
+        sub.unshift(...extraContents)
+      }
+
+      if (typeof content === 'string') {
+        sub.unshift(content)
+      } else if (Array.isArray(content)) {
+        sub.unshift(...content)
+      }
+
+      sub.length > 0 && typedJSFn.init(sub)
+    } else {
+      document.getElementById('subtitle').textContent = typeof content === 'string' ? content :
+        (Array.isArray(content) && content.length > 0 ? content[0] : '')
+    }
+  }
+}
+btf.addGlobalFn('pjaxSendOnce', () => { typed.destroy() }, 'typedDestroy')
+</script><script>function subtitleType () {
+  fetch('https://v1.hitokoto.cn')
+    .then(response => response.json())
+    .then(data => {
+      const from = '出自 ' + data.from
+      typedJSFn.processSubtitle(data.hitokoto, [from])
+    })
+    .catch(err => {
+      console.error('Failed to get the Hitokoto API:', err)
+      typedJSFn.processSubtitle([])
+    })
+}
+typedJSFn.run(subtitleType)
+</script></div><div class="aplayer no-destroy" data-id="18480" data-server="netease" data-type="artist" data-fixed="true" data-mini="true" data-order="random" data-preload="metadata" data-autoplay="true" data-lrctype="3"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/metingjs/dist/Meting.min.js"></script><script>(() => {
+  const destroyAplayer = () => {
+    if (window.aplayers) {
+      for (let i = 0; i < window.aplayers.length; i++) {
+        if (!window.aplayers[i].options.fixed) {
+          window.aplayers[i].destroy()
+        }
+      }
+    }
+  }
+
+  const runMetingJS = () => {
+    typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+  }
+
+  btf.addGlobalFn('pjaxSend', destroyAplayer, 'destroyAplayer')
+  btf.addGlobalFn('pjaxComplete', loadMeting, 'runMetingJS')
+})()</script><script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.min.js" defer="defer"></script><script>document.addEventListener('DOMContentLoaded', () => {
+  const pjaxSelectors = ["meta[property=\"og:image\"]","meta[property=\"og:title\"]","meta[property=\"og:url\"]","meta[property=\"og:description\"]","link[rel=\"canonical\"]","head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+  window.pjax = new Pjax({
+    elements: 'a:not([target="_blank"])',
+    selectors: pjaxSelectors,
+    cacheBust: false,
+    analytics: false,
+    scrollRestoration: false
+  })
+
+  const triggerPjaxFn = (val) => {
+    if (!val) return
+    Object.values(val).forEach(fn => {
+      try {
+        fn()
+      } catch (err) {
+        console.debug('Pjax callback failed:', err)
+      }
+    })
+  }
+
+  document.addEventListener('pjax:send', () => {
+    // removeEventListener
+    btf.removeGlobalFnEvent('pjaxSendOnce')
+    btf.removeGlobalFnEvent('themeChange')
+
+    // reset readmode
+    const $bodyClassList = document.body.classList
+    if ($bodyClassList.contains('read-mode')) $bodyClassList.remove('read-mode')
+
+    triggerPjaxFn(window.globalFn.pjaxSend)
+  })
+
+  document.addEventListener('pjax:complete', () => {
+    btf.removeGlobalFnEvent('pjaxCompleteOnce')
+    document.querySelectorAll('script[data-pjax]').forEach(item => {
+      const newScript = document.createElement('script')
+      const content = item.text || item.textContent || item.innerHTML || ""
+      Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+      newScript.appendChild(document.createTextNode(content))
+      item.parentNode.replaceChild(newScript, item)
+    })
+
+    triggerPjaxFn(window.globalFn.pjaxComplete)
+  })
+
+  document.addEventListener('pjax:error', e => {
+    if (e.request.status === 404) {
+      true
+        ? pjax.loadUrl('/404.html')
+        : window.location.href = e.request.responseURL
+    }
+  })
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

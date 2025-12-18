@@ -1,0 +1,453 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="dark"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Redis笔记(自用) | 惜别的秘密基地</title><meta name="author" content="SekiBetu"><meta name="copyright" content="SekiBetu"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#0d0d0d"><meta name="description" content="Redis Redis: Remote Dictionary Server 三个特点:  Redis 支持数据持久化. 可以将内存中的数据保持在磁盘中, 重启后可再次使用 Redis 支持 key-val, list, set, zset, hash 等数据结构存储 Redis 支持数据备份, master-slave 模式数据备份  零碎基础知识  单进程 (*) 单进程处理客户端的请求, 对读">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Redis笔记(自用)">
+<meta property="og:url" content="https://sekibetu.com/redis01.html">
+<meta property="og:site_name" content="惜别的秘密基地">
+<meta property="og:description" content="Redis Redis: Remote Dictionary Server 三个特点:  Redis 支持数据持久化. 可以将内存中的数据保持在磁盘中, 重启后可再次使用 Redis 支持 key-val, list, set, zset, hash 等数据结构存储 Redis 支持数据备份, master-slave 模式数据备份  零碎基础知识  单进程 (*) 单进程处理客户端的请求, 对读">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://sekibetu.com/img/67861832_p0.jpg">
+<meta property="article:published_time" content="2020-08-01T07:24:34.000Z">
+<meta property="article:modified_time" content="2025-09-16T15:34:20.000Z">
+<meta property="article:author" content="SekiBetu">
+<meta property="article:tag" content="Redis">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://sekibetu.com/img/67861832_p0.jpg"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Redis笔记(自用)",
+  "url": "https://sekibetu.com/redis01.html",
+  "image": "https://sekibetu.com/img/67861832_p0.jpg",
+  "datePublished": "2020-08-01T07:24:34.000Z",
+  "dateModified": "2025-09-16T15:34:20.000Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "SekiBetu",
+      "url": "https://sekibetu.com"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/favicon.ico"><link rel="canonical" href="https://sekibetu.com/redis01.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.3"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar@0.1.16/dist/snackbar.min.css" media="print" onload="this.media='all'"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!true && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><link rel="stylesheet" href="/font/JetBrainsMonoNL-Regular.ttf" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":true},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: {"chs_to_cht":"已切换为繁体中文","cht_to_chs":"已切换为简体中文","day_to_night":"已切换为深色模式","night_to_day":"已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#1f1f1f","position":"bottom-left"},
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.12.0/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Redis笔记(自用)',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 8.1.1"><link rel="alternate" href="/atom.xml" title="惜别的秘密基地" type="application/atom+xml">
+</head><body><div class="bg-animation" id="web_bg" style="background-image: url(/img/67861832_p0.jpg);"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/SekiBetu.png" onerror="this.onerror=null;this.src='/img/Starfetcher.jpg'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">18</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">27</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(/img/67861832_p0.jpg);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">惜别的秘密基地</span></a><a class="nav-page-title" href="/"><span class="site-name">Redis笔记(自用)</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">Redis笔记(自用)</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2020-08-01T07:24:34.000Z" title="发表于 2020-08-01 15:24:34">2020-08-01</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-09-16T15:34:20.000Z" title="更新于 2025-09-16 23:34:20">2025-09-16</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">总字数:</span><span class="word-count">937</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>3分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><div id="post-outdate-notice" data="{&quot;limitDay&quot;:365,&quot;messagePrev&quot;:&quot;本文创建在&quot;,&quot;messageNext&quot;:&quot;天前，其中的内容有可能已经过时&quot;,&quot;postUpdate&quot;:&quot;2025-09-16 23:34:20&quot;}" hidden></div><h2 id="Redis">Redis</h2>
+<p>Redis: <strong>Re</strong>mote <strong>Di</strong>ctionary <strong>S</strong>erver</p>
+<p>三个特点:</p>
+<ul>
+<li>Redis 支持数据持久化. 可以将内存中的数据保持在磁盘中, 重启后可再次使用</li>
+<li>Redis 支持 <code>key-val</code>, <code>list</code>, <code>set</code>, <code>zset</code>, <code>hash</code> 等数据结构存储</li>
+<li>Redis 支持数据备份, master-slave 模式数据备份</li>
+</ul>
+<p><strong>零碎基础知识</strong></p>
+<ol>
+<li>单进程 (*) 单进程处理客户端的请求, 对读写事件响应是通过 <code>epoll</code> 函数而包装来操作. Redis 实际处理速度完全依靠主进程执行效率</li>
+<li>默认 <code>16</code> 个数据库, 类似数组下标从 <code>0</code> 开始, 初始默认使用 <code>0</code> 号库</li>
+<li><code>select</code> 切换数据库</li>
+<li><code>dbsize</code> 查看当前数据库的 <code>key</code> 的数量</li>
+<li><code>flushdb</code> 清空当前数据库</li>
+<li><code>flushall</code> 删全部库</li>
+<li>统一密码管理, <code>16</code> 个库同一个密码</li>
+<li>Redis 索引是从 <code>0</code> 开始</li>
+<li>默认端口 <code>6379</code></li>
+</ol>
+<h2 id="Redis-数据类型">Redis 数据类型</h2>
+<h3 id="五大数据类型">五大数据类型</h3>
+<ol>
+<li>String (字符串)</li>
+<li>Hash (哈希, 类似 Java HashMap)</li>
+<li>List (列表)</li>
+<li>Set (集合)</li>
+<li>Zset (Sorted Set: 有序集合)</li>
+</ol>
+<p><strong>String (字符串)</strong></p>
+<ol>
+<li>一个 <code>key</code> 对应一个 <code>value</code></li>
+<li>二进制安全. 可以包含任何数据, 包括图片或者序列化对象</li>
+<li><code>value</code> 最多可以是 512M</li>
+</ol>
+<p><strong>Hash</strong></p>
+<ol>
+<li>string 类型的 <code>field</code> 和 <code>value</code> 的映射表</li>
+</ol>
+<p><strong>List (列表)</strong></p>
+<ol>
+<li>底层是一个<strong>链表</strong></li>
+<li>按照插入顺序排序, 可以在头部或者尾部插入数据</li>
+</ol>
+<p><strong>Set</strong></p>
+<ol>
+<li>string 类型的无序集合, 是通过 HashTable 实现的</li>
+</ol>
+<p><strong>Zset (Sorted Set)</strong></p>
+<ol>
+<li>string 类型的集合</li>
+<li>与 Set 不同的是: 每个元素都会关联一个 double 类型的分数</li>
+<li>Redis 通过分数来为集合中的成员进行从小到大排序</li>
+<li>zset 成员唯一, 但是分数 (score) 可以重复!</li>
+</ol>
+<h3 id="Redis-键-key">Redis 键 (key)</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">key *</span><br><span class="line"></span><br><span class="line"># 判断某个 key 是否存在</span><br><span class="line">exists key</span><br><span class="line"></span><br><span class="line"># 将 key 移动到另一个库</span><br><span class="line">move key db</span><br><span class="line"></span><br><span class="line"># 给 key 设置过期时间</span><br><span class="line">expire key</span><br><span class="line"></span><br><span class="line"># 查看还有多长时间 key 过期, -1 表示永不过期, -2 表示已经过期</span><br><span class="line">ttl key</span><br><span class="line"></span><br><span class="line"># 移除key的过期时间，即设置回永不过期</span><br><span class="line">persist key</span><br><span class="line"></span><br><span class="line"># 查看 key 是什么类型</span><br><span class="line">type key</span><br><span class="line"></span><br><span class="line">get k1</span><br><span class="line"></span><br><span class="line"># 有对应的键值, 覆盖 value</span><br><span class="line">set k1 v1</span><br><span class="line"></span><br><span class="line"># 删除 key</span><br><span class="line">del key</span><br></pre></td></tr></table></figure>
+<h3 id="Redis-字符串-String">Redis 字符串 (String)</h3>
+<p>单值单 value</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">set / get / del / append / strlen</span><br><span class="line">incr / decr / incrby / decrby</span><br><span class="line"></span><br><span class="line"># 获取指定区间范围的值</span><br><span class="line">getrange key 0 -1</span><br><span class="line"></span><br><span class="line"># 范围内设置值 (结果 key 对应的 value 以 &#x27;xxx&#x27;开头)</span><br><span class="line">setrange key 0 xxx</span><br><span class="line"></span><br><span class="line"># 设置过期时间</span><br><span class="line">setex</span><br><span class="line"></span><br><span class="line"># set if not exist</span><br><span class="line">setnx</span><br><span class="line"></span><br><span class="line"># 设置 / 获取 多个键值对</span><br><span class="line">mset / mget / msetnx</span><br></pre></td></tr></table></figure>
+<h3 id="Redis-列表-List">Redis 列表 (List)</h3>
+<p>单值多 value</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">lpush / rpush / lrange</span><br><span class="line"></span><br><span class="line">lpop / rpop</span><br><span class="line"></span><br><span class="line"># 按照索引下标获得元素 (从上到下)</span><br><span class="line">lindex</span><br><span class="line"></span><br><span class="line">llen</span><br><span class="line"></span><br><span class="line"># 删除 n 个 val</span><br><span class="line">lrem key n val</span><br><span class="line"></span><br><span class="line"># 截取指定范围的值然后再赋值给 key</span><br><span class="line">ltrim key index1 index 2</span><br><span class="line"></span><br><span class="line"># 源列表 -&gt; 目标列表</span><br><span class="line">rpoplpush list1 list2</span><br><span class="line"></span><br><span class="line">lset key index value</span><br><span class="line"></span><br><span class="line">linsert key before/after val1 val2</span><br></pre></td></tr></table></figure>
+<p>性能总结</p>
+<ol>
+<li>是一个字符串链表, left, right 都可以插入添加</li>
+<li>如果键不存在, 创建新的链表</li>
+<li>如果键已存在, 新增内容</li>
+<li>如果值完全移除, 对应的键也就消失了</li>
+<li>链表操作头尾效率很高, 中间元素效率不高</li>
+</ol>
+<h3 id="Redis-集合-Set">Redis 集合 (Set)</h3>
+<p>单值多 value</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">sadd / smembers / sismembers</span><br><span class="line"></span><br><span class="line"># 获取集合里元素个数</span><br><span class="line">scard</span><br><span class="line"></span><br><span class="line"># 删除集合中元素</span><br><span class="line">srem key value</span><br><span class="line"></span><br><span class="line">srandmember key 某个整数</span><br><span class="line"></span><br><span class="line"># 随机 pop 元素</span><br><span class="line">spop key</span><br><span class="line"></span><br><span class="line"># 将 key1 里的某个值赋值给 key2</span><br><span class="line">smove set01 set02 5</span><br><span class="line"></span><br><span class="line"># 差集 / 交集 / 并集</span><br><span class="line">sdiff / sinter / sunion</span><br></pre></td></tr></table></figure>
+<h3 id="Redis-哈希-Hash">Redis 哈希 (Hash)</h3>
+<p>KV 模式不变, 但 V 是一个键值对</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">hset / hget / hmset / hmget / hgetall / hdel</span><br><span class="line"></span><br><span class="line">hlen</span><br><span class="line"></span><br><span class="line"># 在 key 里面的某个值的 key</span><br><span class="line">hexists key</span><br><span class="line"></span><br><span class="line">hkeys / hvals</span><br><span class="line"></span><br><span class="line">hincrby / hincrbyfloat</span><br><span class="line"></span><br><span class="line">hsetnx</span><br></pre></td></tr></table></figure>
+<h3 id="Redis-有序集合-Zset">Redis 有序集合 (Zset)</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">zadd / zrange (withscores)</span><br><span class="line"></span><br><span class="line"># 开始 score1 结束 score2</span><br><span class="line">zrangebyscore key score1 score2</span><br><span class="line">	withscore</span><br><span class="line">	&#x27;(&#x27; 不包含</span><br><span class="line">	limit 开始下标步, 多少步</span><br><span class="line"></span><br><span class="line"># 删除元素</span><br><span class="line">zrem key 某 score 下对应的 value</span><br><span class="line"></span><br><span class="line">zcard / zcount key &lt;score_range&gt; / zrank key values</span><br></pre></td></tr></table></figure>
+<h2 id="Reference">Reference</h2>
+<ol>
+<li>
+<p><a target="_blank" rel="noopener" href="https://zhenye-na.github.io/2019/08/29/redis-cheatsheet.html#redis-%E4%BA%8B%E5%8A%A1">https://zhenye-na.github.io/2019/08/29/redis-cheatsheet.html#redis-%E4%BA%8B%E5%8A%A1</a></p>
+</li>
+<li>
+<p><a target="_blank" rel="noopener" href="https://github.com/LeCoupa/awesome-cheatsheets/blob/master/databases/redis.sh">https://github.com/LeCoupa/awesome-cheatsheets/blob/master/databases/redis.sh</a></p>
+</li>
+</ol>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://sekibetu.com">SekiBetu</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://sekibetu.com/redis01.html">https://sekibetu.com/redis01.html</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="https://sekibetu.com" target="_blank">惜别的秘密基地</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Redis/">Redis</a></div><div class="post-share"><div class="social-share" data-image="/img/67861832_p0.jpg" data-sites="facebook,x,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/mybatis01.html" title="MyBatis如何获取刚刚插入数据的ID"><img class="cover" src="/img/67861832_p0.jpg" onerror="onerror=null;src='/img/Starfetcher.jpg'" alt="cover of previous post"><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">MyBatis如何获取刚刚插入数据的ID</div></div><div class="info-2"><div class="info-item-1">​ 有时业务逻辑中需要获取刚刚插入的数据的自增 ID 值以用于后续使用，MyBatis 提供了 LAST_INSERT_ID() 函数获取该 ID 值： 1234567891011&lt;mapper&gt;    &lt;insert id=&quot;add&quot; parameterType=&quot;pojo&quot;&gt;        &lt;!--insert操作结束后查询最后一条插入的数据的ID值并将其赋值给pojo对象中的id属性--&gt;        &lt;selectKey resultType=&quot;java.lang.Integer&quot; order=&quot;AFTER&quot; keyProperty=&quot;id&quot;&gt;            select LAST_INSERT_ID()        &lt;/selectKey&gt;        insert into table(items) values(#&#123;items&#125;)    &lt;/insert&gt;&lt;...</div></div></div></a><a class="pagination-related" href="/mysql01.html" title="MySQL事物隔离级别笔记"><img class="cover" src="/img/67861832_p0.jpg" onerror="onerror=null;src='/img/Starfetcher.jpg'" alt="cover of next post"><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">MySQL事物隔离级别笔记</div></div><div class="info-2"><div class="info-item-1">   隔离级别 脏读（Dirty Read） 不可重复读（NonRepeatable Read） 幻读（Phantom Read）     未提交读（Read uncommitted） yes yes yes   已提交读（Read committed） no yes yes   可重复读（Repeatable read） no no yes   可串行化（Serializable ） no no no      未提交读(Read uncommitted)：能读取到别的事务未提交的数据   已提交读(Read committed)：只能读取到别的事务已经提交的数据   可重复读(Repeatable)：在读取数据后直接加锁，其他事务无法修改和删除这些数据，但是防不住 insert 的新数据   可串行化(Serializable)：读取用读取锁，写入用写入锁，这两个锁互斥，这样能保证数据绝对安全，但是性能低下   脏读(Dirty Read)：可以读取到未提交的数据   不可重复读(NonRepeatable Read)：在读取完数据后数据又修改并 commit 了，导致第二次...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/redis02.html" title="Redis笔记02(自用)"><img class="cover" src="/img/67861832_p0.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2020-10-10</div><div class="info-item-2">Redis笔记02(自用)</div></div><div class="info-2"><div class="info-item-1">随手记点笔记，不全，自用 删除策略 定时删除  定时删除，CPU 占用大  惰性删除  过期数据二次访问后才删除，内存占用大  定期删除  随机抽查删除，hz 值决定了 CPU 和内存哪个占用大  淘汰策略   内存不足时按策略删除   maxmemory ?mb 最大可用内存，默认为 0 不限制，一般设置物理机的 50%以上   maxmemory-samples count 每次随机删除的数据个数   maxmemory-policy policy 删除策略   volatile 易失数据  volatile-lru 按最后一次使用时间 volatile-lfu 按最近使用次数 volatile-ttl 按即将过期的数据 volatile-random 随机    allkeys 全库数据  allkeys-lru 按最后一次使用时间 allkeys-lfu 按最近使用次数 allkeys-random 随机    no-enviction 放弃数据驱逐       主从复制 建立连接的流程  设置 master 地址和端口并保存 建立 socket 连接 发送 ping 命...</div></div></div></a></div></div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div><div class="comment-switch"><span class="first-comment">Utterances</span><span id="switch-btn"></span><span class="second-comment">Giscus</span></div></div><div class="comment-wrap"><div><div id="utterances-wrap"></div></div><div><div id="giscus-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/SekiBetu.png" onerror="this.onerror=null;this.src='/img/Starfetcher.jpg'" alt="avatar"/></div><div class="author-info-name">SekiBetu</div><div class="author-info-description">记录与分享各种东西</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">18</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">27</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/SekiBetu"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://twitter.com/_SekiBetu_" target="_blank" title="Twitter"><i class="fab fa-twitter"></i></a><a class="social-icon" href="mailto:realsekibetu@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="https://sekibetu.com/atom.xml" target="_blank" title="RSS"><i class="fas fa-rss"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content is-expand"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Redis"><span class="toc-number">1.</span> <span class="toc-text">Redis</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Redis-%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-number">2.</span> <span class="toc-text">Redis 数据类型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%94%E5%A4%A7%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-number">2.1.</span> <span class="toc-text">五大数据类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Redis-%E9%94%AE-key"><span class="toc-number">2.2.</span> <span class="toc-text">Redis 键 (key)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Redis-%E5%AD%97%E7%AC%A6%E4%B8%B2-String"><span class="toc-number">2.3.</span> <span class="toc-text">Redis 字符串 (String)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Redis-%E5%88%97%E8%A1%A8-List"><span class="toc-number">2.4.</span> <span class="toc-text">Redis 列表 (List)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Redis-%E9%9B%86%E5%90%88-Set"><span class="toc-number">2.5.</span> <span class="toc-text">Redis 集合 (Set)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Redis-%E5%93%88%E5%B8%8C-Hash"><span class="toc-number">2.6.</span> <span class="toc-text">Redis 哈希 (Hash)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Redis-%E6%9C%89%E5%BA%8F%E9%9B%86%E5%90%88-Zset"><span class="toc-number">2.7.</span> <span class="toc-text">Redis 有序集合 (Zset)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Reference"><span class="toc-number">3.</span> <span class="toc-text">Reference</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/linus01.html" title="对Linux社区封禁俄罗斯开发者且linus本人支持这一行为的评价">对Linux社区封禁俄罗斯开发者且linus本人支持这一行为的评价</a><time datetime="2024-10-24T13:54:15.000Z" title="发表于 2024-10-24 21:54:15">2024-10-24</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/followis.html" title="三分钟，让Follow认证我的Hexo博客订阅源">三分钟，让Follow认证我的Hexo博客订阅源</a><time datetime="2024-10-14T12:04:50.000Z" title="发表于 2024-10-14 20:04:50">2024-10-14</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/rss01.html" title="给 Hexo 博客加上 PubSubHubbub 协议实现 RSS 实时推送">给 Hexo 博客加上 PubSubHubbub 协议实现 RSS 实时推送</a><time datetime="2022-06-29T21:55:05.000Z" title="发表于 2022-06-30 05:55:05">2022-06-30</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/sniff01.html" title="抓取安卓端FGO游戏数据并导入素材规划软件Chaldea教程(需解锁BootLoader)">抓取安卓端FGO游戏数据并导入素材规划软件Chaldea教程(需解锁BootLoader)</a><time datetime="2022-06-08T11:58:22.000Z" title="发表于 2022-06-08 19:58:22">2022-06-08</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/ssh01.html" title="SSH客户端简单对比">SSH客户端简单对比</a><time datetime="2022-06-07T14:37:06.000Z" title="发表于 2022-06-07 22:37:06">2022-06-07</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url(/img/67861832_p0.jpg);"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2020 - 2025 By SekiBetu</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 8.1.1</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.3</a></span></div><div class="footer_custom_text"><a href="https://icp.gov.moe/?keyword=20213842" target="_blank">萌ICP备20213842号</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="前往评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.3"></script><script src="/js/main.js?v=5.5.3"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar@0.1.16/dist/snackbar.min.js"></script><div class="js-pjax"><script>(() => {
+  const isShuoshuo = GLOBAL_CONFIG_SITE.pageType === 'shuoshuo'
+  const option = null
+  const getUtterancesTheme = theme => theme === 'dark' ? 'github-dark' : 'github-light'
+
+  const loadUtterances = (el = document, key) => {
+    if (isShuoshuo) {
+      window.shuoshuoComment.destroyUtterances = () => {
+        if (el.children.length) {
+          el.innerHTML = ''
+          el.classList.add('no-comment')
+        }
+      }
+    }
+
+    const config = {
+      src: 'https://utteranc.es/client.js',
+      repo: 'SekiBetu/BlogComments',
+      theme: getUtterancesTheme(document.documentElement.getAttribute('data-theme')),
+      crossorigin: 'anonymous',
+      async: true,
+      ...option,
+      'issue-term': isShuoshuo ? key : (option && option['issue-term']) || 'title'
+    }
+
+    const ele = document.createElement('script')
+    Object.entries(config).forEach(([key, value]) => ele.setAttribute(key, value))
+    el.querySelector('#utterances-wrap').appendChild(ele)
+  }
+
+  const changeUtterancesTheme = theme => {
+    const iframe = document.querySelector('#utterances-wrap iframe')
+    if (iframe) {
+      const message = {
+        type: 'set-theme',
+        theme: getUtterancesTheme(theme)
+      };
+      iframe.contentWindow.postMessage(message, 'https://utteranc.es')
+    }
+  }
+
+  btf.addGlobalFn('themeChange', changeUtterancesTheme, 'utterances')
+
+  if (isShuoshuo) {
+    'Utterances' === 'Utterances'
+      ? window.shuoshuoComment = { loadComment: loadUtterances }
+      : window.loadOtherComment = loadUtterances
+    return
+  }
+  
+  if ('Utterances' === 'Utterances' || !false) {
+    if (false) btf.loadComment(document.getElementById('utterances-wrap'), loadUtterances)
+    else loadUtterances()
+  } else {
+    window.loadOtherComment = loadUtterances
+  }
+})()</script><script>(() => {
+  const isShuoshuo = GLOBAL_CONFIG_SITE.pageType === 'shuoshuo'
+  const option = null
+
+  const getGiscusTheme = theme => theme === 'dark' ? 'dark' : 'light'
+
+  const createScriptElement = config => {
+    const ele = document.createElement('script')
+    Object.entries(config).forEach(([key, value]) => {
+      ele.setAttribute(key, value)
+    })
+    return ele
+  }
+
+  const loadGiscus = (el = document, key) => {
+    const mappingConfig = isShuoshuo
+      ? { 'data-mapping': 'specific', 'data-term': key }
+      : { 'data-mapping': (option && option['data-mapping']) || 'pathname' }
+
+    const giscusConfig = {
+      src: 'https://giscus.app/client.js',
+      'data-repo': 'SekiBetu/BlogComments',
+      'data-repo-id': 'MDEwOlJlcG9zaXRvcnk0MDU2MzIxMzY=',
+      'data-category-id': 'DIC_kwDOGC10iM4CPwsn',
+      'data-theme': getGiscusTheme(document.documentElement.getAttribute('data-theme')),
+      'data-reactions-enabled': '1',
+      crossorigin: 'anonymous',
+      async: true,
+      ...option,
+      ...mappingConfig
+    }
+
+    const scriptElement = createScriptElement(giscusConfig)
+
+    el.querySelector('#giscus-wrap').appendChild(scriptElement)
+
+    if (isShuoshuo) {
+      window.shuoshuoComment.destroyGiscus = () => {
+        if (el.children.length) {
+          el.innerHTML = ''
+          el.classList.add('no-comment')
+        }
+      }
+    }
+  }
+
+  const changeGiscusTheme = theme => {
+    const iframe = document.querySelector('#giscus-wrap iframe')
+    if (iframe) {
+      const message = {
+        giscus: {
+          setConfig: {
+            theme: getGiscusTheme(theme)
+          }
+        }
+      }
+      iframe.contentWindow.postMessage(message, 'https://giscus.app')
+    }
+  }
+
+  btf.addGlobalFn('themeChange', changeGiscusTheme, 'giscus')
+
+  if (isShuoshuo) {
+    'Utterances' === 'Giscus'
+      ? window.shuoshuoComment = { loadComment: loadGiscus }
+      : window.loadOtherComment = loadGiscus
+    return
+  }
+
+  if ('Utterances' === 'Giscus' || !false) {
+    if (false) btf.loadComment(document.getElementById('giscus-wrap'), loadGiscus)
+    else loadGiscus()
+  } else {
+    window.loadOtherComment = loadGiscus
+  }
+})()</script></div><div class="aplayer no-destroy" data-id="18480" data-server="netease" data-type="artist" data-fixed="true" data-mini="true" data-order="random" data-preload="metadata" data-autoplay="true" data-lrctype="3"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/metingjs/dist/Meting.min.js"></script><script>(() => {
+  const destroyAplayer = () => {
+    if (window.aplayers) {
+      for (let i = 0; i < window.aplayers.length; i++) {
+        if (!window.aplayers[i].options.fixed) {
+          window.aplayers[i].destroy()
+        }
+      }
+    }
+  }
+
+  const runMetingJS = () => {
+    typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+  }
+
+  btf.addGlobalFn('pjaxSend', destroyAplayer, 'destroyAplayer')
+  btf.addGlobalFn('pjaxComplete', loadMeting, 'runMetingJS')
+})()</script><script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.min.js" defer="defer"></script><script>document.addEventListener('DOMContentLoaded', () => {
+  const pjaxSelectors = ["meta[property=\"og:image\"]","meta[property=\"og:title\"]","meta[property=\"og:url\"]","meta[property=\"og:description\"]","link[rel=\"canonical\"]","head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+  window.pjax = new Pjax({
+    elements: 'a:not([target="_blank"])',
+    selectors: pjaxSelectors,
+    cacheBust: false,
+    analytics: false,
+    scrollRestoration: false
+  })
+
+  const triggerPjaxFn = (val) => {
+    if (!val) return
+    Object.values(val).forEach(fn => {
+      try {
+        fn()
+      } catch (err) {
+        console.debug('Pjax callback failed:', err)
+      }
+    })
+  }
+
+  document.addEventListener('pjax:send', () => {
+    // removeEventListener
+    btf.removeGlobalFnEvent('pjaxSendOnce')
+    btf.removeGlobalFnEvent('themeChange')
+
+    // reset readmode
+    const $bodyClassList = document.body.classList
+    if ($bodyClassList.contains('read-mode')) $bodyClassList.remove('read-mode')
+
+    triggerPjaxFn(window.globalFn.pjaxSend)
+  })
+
+  document.addEventListener('pjax:complete', () => {
+    btf.removeGlobalFnEvent('pjaxCompleteOnce')
+    document.querySelectorAll('script[data-pjax]').forEach(item => {
+      const newScript = document.createElement('script')
+      const content = item.text || item.textContent || item.innerHTML || ""
+      Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+      newScript.appendChild(document.createTextNode(content))
+      item.parentNode.replaceChild(newScript, item)
+    })
+
+    triggerPjaxFn(window.globalFn.pjaxComplete)
+  })
+
+  document.addEventListener('pjax:error', e => {
+    if (e.request.status === 404) {
+      true
+        ? pjax.loadUrl('/404.html')
+        : window.location.href = e.request.responseURL
+    }
+  })
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

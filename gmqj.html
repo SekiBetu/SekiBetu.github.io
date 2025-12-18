@@ -1,0 +1,414 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="dark"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>记一次拿到光猫超管账号改路由为桥接的过程 | 惜别的秘密基地</title><meta name="author" content="SekiBetu"><meta name="copyright" content="SekiBetu"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#0d0d0d"><meta name="description" content="​ 大家都知道，电信的光猫一般性能都比较差，在实现了光电转换功能的同时，默认的路由模式会让光猫背负起本来是路由器在干的拨号上网功能，笔者最近发现家里的网时不时会断流一秒，导致玩彩虹六号卡卡的，就想着如何改桥接，先是在网上搜到了通用的超级管理员密码 telecomadmin nE7jA%5m，但试了下发现是错误的，并且网上那种固定端口获取 dump 文件的方法也不适用于我的光猫，于是拨打客服电话问了">
+<meta property="og:type" content="article">
+<meta property="og:title" content="记一次拿到光猫超管账号改路由为桥接的过程">
+<meta property="og:url" content="https://sekibetu.com/gmqj.html">
+<meta property="og:site_name" content="惜别的秘密基地">
+<meta property="og:description" content="​ 大家都知道，电信的光猫一般性能都比较差，在实现了光电转换功能的同时，默认的路由模式会让光猫背负起本来是路由器在干的拨号上网功能，笔者最近发现家里的网时不时会断流一秒，导致玩彩虹六号卡卡的，就想着如何改桥接，先是在网上搜到了通用的超级管理员密码 telecomadmin nE7jA%5m，但试了下发现是错误的，并且网上那种固定端口获取 dump 文件的方法也不适用于我的光猫，于是拨打客服电话问了">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://sekibetu.com/img/67861832_p0.jpg">
+<meta property="article:published_time" content="2020-05-09T01:11:01.000Z">
+<meta property="article:modified_time" content="2025-09-16T15:34:20.000Z">
+<meta property="article:author" content="SekiBetu">
+<meta property="article:tag" content="Fiddler">
+<meta property="article:tag" content="光猫">
+<meta property="article:tag" content="桥接">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://sekibetu.com/img/67861832_p0.jpg"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "记一次拿到光猫超管账号改路由为桥接的过程",
+  "url": "https://sekibetu.com/gmqj.html",
+  "image": "https://sekibetu.com/img/67861832_p0.jpg",
+  "datePublished": "2020-05-09T01:11:01.000Z",
+  "dateModified": "2025-09-16T15:34:20.000Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "SekiBetu",
+      "url": "https://sekibetu.com"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/favicon.ico"><link rel="canonical" href="https://sekibetu.com/gmqj.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.3"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar@0.1.16/dist/snackbar.min.css" media="print" onload="this.media='all'"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!true && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><link rel="stylesheet" href="/font/JetBrainsMonoNL-Regular.ttf" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":true},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: {"chs_to_cht":"已切换为繁体中文","cht_to_chs":"已切换为简体中文","day_to_night":"已切换为深色模式","night_to_day":"已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#1f1f1f","position":"bottom-left"},
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.12.0/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '记一次拿到光猫超管账号改路由为桥接的过程',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 8.1.1"><link rel="alternate" href="/atom.xml" title="惜别的秘密基地" type="application/atom+xml">
+</head><body><div class="bg-animation" id="web_bg" style="background-image: url(/img/67861832_p0.jpg);"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/SekiBetu.png" onerror="this.onerror=null;this.src='/img/Starfetcher.jpg'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">18</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">27</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(/img/67861832_p0.jpg);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">惜别的秘密基地</span></a><a class="nav-page-title" href="/"><span class="site-name">记一次拿到光猫超管账号改路由为桥接的过程</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">记一次拿到光猫超管账号改路由为桥接的过程</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2020-05-09T01:11:01.000Z" title="发表于 2020-05-09 09:11:01">2020-05-09</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-09-16T15:34:20.000Z" title="更新于 2025-09-16 23:34:20">2025-09-16</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">总字数:</span><span class="word-count">1.1k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>3分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><div id="post-outdate-notice" data="{&quot;limitDay&quot;:365,&quot;messagePrev&quot;:&quot;本文创建在&quot;,&quot;messageNext&quot;:&quot;天前，其中的内容有可能已经过时&quot;,&quot;postUpdate&quot;:&quot;2025-09-16 23:34:20&quot;}" hidden></div><p>​ 大家都知道，电信的光猫一般性能都比较差，在实现了光电转换功能的同时，默认的路由模式会让光猫背负起本来是路由器在干的拨号上网功能，笔者最近发现家里的网时不时会断流一秒，导致玩彩虹六号卡卡的，就想着如何改桥接，先是在网上搜到了通用的超级管理员密码 telecomadmin nE7jA%5m，但试了下发现是错误的，并且网上那种固定端口获取 dump 文件的方法也不适用于我的光猫，于是拨打客服电话问了问，客服也不愿意说，就只能自己动手了</p>
+<p>​ 以下是全过程记录：</p>
+<h2 id="第一步">第一步</h2>
+<p>​ 首先，安装抓包软件 Fiddler Classic，然后准备好一个 fat32 格式的 U 盘，并在里面新建一个文件夹</p>
+<p><img src="gmqj/1.jpg" alt=""></p>
+<p>然后插到光猫上，浏览器输入 192.168.1.1 进入天翼网关</p>
+<p>输入光猫背后贴的用户账号密码，就是 useradmin 那个</p>
+<p>然后进入存储管理，我们发现，U 盘被识别出来了</p>
+<p><img src="S:/hexo/source/_posts/2.jpg" alt=""></p>
+<p>这时我们启动 fidder，然后选择下图所示的事前断点</p>
+<p><img src="gmqj/3.jpg" alt=""></p>
+<p>然后手动去点击文件夹目录，你会发现，点不动，点不动就对了</p>
+<p>这时去寻找到 cgi-bin/luci/admin/storage/openFolder 这条 URL</p>
+<p>然后我们把其中的 U 盘路径改成斜杠，就是进入光猫根目录的意思</p>
+<p><img src="gmqj/4.jpg" alt=""></p>
+<p>最后点击 Run to Completion，执行完毕</p>
+<p>再把断点给关了</p>
+<p><img src="gmqj/5.jpg" alt=""></p>
+<p>你会发现，我们已经进入到了光猫的根目录（如果没进去，刷新下页面，应该是登录信息过期了，整个过程再做一遍，手速要快点）</p>
+<p><img src="gmqj/6.jpg" alt=""></p>
+<p>接着我们把这个路径下的文件复制出来到你的 U 盘里</p>
+<p><img src="gmqj/7.jpg" alt=""></p>
+<p><img src="S:/hexo/source/_posts/8.jpg" alt=""></p>
+<p>这时候就可以把 U 盘拔了插电脑上了</p>
+<h2 id="第二步">第二步</h2>
+<p>​ 拿到设置文件后，我们发现，表面是 xml 格式，但是实际是加密过的二进制文件，这里引用下 52 破解一个大佬的解码猜测过程</p>
+<p><a target="_blank" rel="noopener" href="https://www.52pojie.cn/thread-1005978-1-1.html">https://www.52pojie.cn/thread-1005978-1-1.html</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line">function UnZipCofing(Fname: string): string;</span><br><span class="line">var</span><br><span class="line">  ds: TDecompressionStream;</span><br><span class="line">  ms, fs, tmpfs: TMemoryStream;</span><br><span class="line">  ss: TStringStream;</span><br><span class="line">  bufferSize, blockSize, nextOff: LongWord;</span><br><span class="line">begin</span><br><span class="line">  fs := TMemoryStream.Create;</span><br><span class="line">  tmpfs := TMemoryStream.Create;</span><br><span class="line">  ms := TMemoryStream.Create;</span><br><span class="line">  ss := TStringStream.Create(&#x27;&#x27;);</span><br><span class="line">  if not FileExists(Fname) then</span><br><span class="line">  begin</span><br><span class="line">    ShowMessage(&#x27;文件不存在！&#x27;);</span><br><span class="line">    exit;</span><br><span class="line">  end;</span><br><span class="line">  try</span><br><span class="line">    fs.LoadFromFile(Fname);</span><br><span class="line">    nextOff := 60;</span><br><span class="line">    while nextOff &gt; 0 do</span><br><span class="line">    begin</span><br><span class="line">      fs.Seek(nextOff, soFromBeginning);</span><br><span class="line">  //读取缓冲区大小</span><br><span class="line">      fs.Read(bufferSize, SizeOf(bufferSize));</span><br><span class="line">      bufferSize := Swap32(bufferSize);</span><br><span class="line">  //读取压缩块大小</span><br><span class="line">      fs.Read(blockSize, SizeOf(blockSize));</span><br><span class="line">      blockSize := Swap32(blockSize);</span><br><span class="line">  //读取下一块位置</span><br><span class="line">      fs.Read(nextOff, SizeOf(nextOff));</span><br><span class="line">      nextOff := Swap32(nextOff);</span><br><span class="line">      //复制压缩数据块到临时数据流</span><br><span class="line">      tmpfs.Clear;</span><br><span class="line">      tmpfs.CopyFrom(fs, blockSize);</span><br><span class="line">      tmpfs.Position := 0;</span><br><span class="line">      //解压数据块</span><br><span class="line">      ds := TDecompressionStream.Create(tmpfs);</span><br><span class="line">      ms.SetSize(bufferSize);</span><br><span class="line">      ZeroMemory(ms.Memory, bufferSize);</span><br><span class="line">      ms.Position := 0;</span><br><span class="line">      ds.Read(ms.Memory^, bufferSize);</span><br><span class="line">      //将解压后的数据流复制到字符串数据流</span><br><span class="line">      ss.CopyFrom(ms, 0);</span><br><span class="line">      ds.Free;</span><br><span class="line">    end;&#123;end while&#125;</span><br><span class="line">    //输出合并后的字符串流。</span><br><span class="line">    Result := ss.DataString;</span><br><span class="line">  finally</span><br><span class="line">    //垃圾回收</span><br><span class="line">    fs.Free;</span><br><span class="line">    tmpfs.Free;</span><br><span class="line">    ms.Free;</span><br><span class="line">    ss.Free;</span><br><span class="line">  end;</span><br><span class="line">end;</span><br></pre></td></tr></table></figure>
+<p>鉴于 delphi 太冷门了，没有学习价值，所以可以选择直接下载现成的工具 RouterPassView（软件有壳，杀软会误报）</p>
+<p><a target="_blank" rel="noopener" href="https://www.nirsoft.net/utils/router_password_recovery.html">https://www.nirsoft.net/utils/router_password_recovery.html</a></p>
+<p>解密出来之后我们搜索到如下的字段</p>
+<p><img src="S:/hexo/source/_posts/9.jpg" alt=""></p>
+<p>光猫管理员的账号密码也就出来了</p>
+<p>登录之后我们发现，wow，界面都变了，直接迅速找到网络设置，业务类型是上网的那个连接，我们在超管的情况下只能看到拨号上网的账号，密码可以用到网上营业厅的宽带密码服务去重置或者修改，按道理装完宽带给的回执也会记录你的账号密码</p>
+<p>然后路由改成桥接，其他默认配置建议小白不要碰</p>
+<p><img src="gmqj/10.jpg" alt=""></p>
+<p>这里的 QoS 模块也可以顺手设置一下（注意，此处的 QoS 是用来控制你上网流量、电话和 IPTV 流量的优先级的）</p>
+<p><img src="gmqj/11.jpg" alt=""></p>
+<p>然后，我们到路由器上，直接把以前的自动获取 IP 模式换成拨号上网模式（路由器设置地址和界面大家都不一样，发挥主观能动性，找到类似的设置即可，我这边路由器是浏览器输入 192.168.0.1 进入，别的路由器可以找说明书有说如何进入）</p>
+<p><img src="gmqj/12.jpg" alt=""></p>
+<p>然后我们拿国人开发的小工具</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/HMBSbige/NatTypeTester/releases">https://github.com/HMBSbige/NatTypeTester/releases</a></p>
+<p>测下 NAT 类型</p>
+<p><img src="gmqj/13.jpg" alt=""></p>
+<p>我们发现，是 NAT1 的 FullCone</p>
+<p>到这一步，就结束了</p>
+<p>enjoy it！</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://sekibetu.com">SekiBetu</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://sekibetu.com/gmqj.html">https://sekibetu.com/gmqj.html</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="https://sekibetu.com" target="_blank">惜别的秘密基地</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E6%A1%A5%E6%8E%A5/">桥接</a><a class="post-meta__tags" href="/tags/%E5%85%89%E7%8C%AB/">光猫</a><a class="post-meta__tags" href="/tags/Fiddler/">Fiddler</a></div><div class="post-share"><div class="social-share" data-image="/img/67861832_p0.jpg" data-sites="facebook,x,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/pydecompile.html" title="记一次反编译PyInstaller打包的可执行文件获得其Python源码的过程"><img class="cover" src="/img/67861832_p0.jpg" onerror="onerror=null;src='/img/Starfetcher.jpg'" alt="cover of previous post"><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">记一次反编译PyInstaller打包的可执行文件获得其Python源码的过程</div></div><div class="info-2"><div class="info-item-1">笔者因为一些原因，需要反编译别人打包好的 Python3 写的 exe 程序获得其源码，但是本人对于 Python 的反编译是一窍不通的，于是在十分钟的谷歌学习后，这篇文章诞生了 第一步 首先，我们安装完 python 并且配置好环境变量后，去下载 pyinstxtractor.py 这个工具，他能把 PyInstaller 打包的 exe 文件里包含的依赖库和已编译好的.pyd 或者.pyc 字节码文件给“解压”出来，这其中，.pyd 文件的反编译特别复杂（因为.pyd 其实是已经编译成.c 后封装成类似.dll 的东西了，根本看不出 Python 的源码了），技术力不足的我这部分无能为力，本次讲的是.pyc 的反编译。 1python pyinstxtractor.py Test.exe 运行工具“解压”完成后，  我们看到目录中生成了一个文件夹：  图中的 Test.exe_extracted 文件夹便是 Test.exe 文件被“解压”后的结果，然后我们找到类型为.pyc 的字节码文件（或者如下图所示的类型为文件的文件）  然后把他们改为后缀名为.pyc 的字节码文件（因...</div></div></div></a><a class="pagination-related" href="/uwp01.html" title="Windows系统如何解除UWP应用的网络隔离"><img class="cover" src="/img/67861832_p0.jpg" onerror="onerror=null;src='/img/Starfetcher.jpg'" alt="cover of next post"><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">Windows系统如何解除UWP应用的网络隔离</div></div><div class="info-2"><div class="info-item-1">​微软服务器对于大陆的连接质量不是很好，很多 UWP 应用时常无法正常使用，而且，UWP 应用是与系统网络隔离的，那么，如何让 UWP 的流量走代理呢，微软官方的开发者中心给出了一个方法： https://docs.microsoft.com/en-us/windows/iot-core/develop-your-app/loopback 以下是实施这个方法的全过程： 情景一（单个设置）： 首先打开注册表，Win+R 键，输入 regedit 回车  找到以下路径： 1HKEY_CURRENT_USER\Software\Classes\Local Settings\Software\Microsoft\Windows\CurrentVersion\AppContainer\Mappings  其中，左边的注册表项即为应用的 SID 值  右边的 DisplayName 对应的值即为应用的名称，比如这里就是 Windows 商店  接着，使用管理员权限打开 CMD 或者 Powershell  输入 1CheckNetIsolation.exe loopbackexempt -a...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/sniff01.html" title="抓取安卓端FGO游戏数据并导入素材规划软件Chaldea教程(需解锁BootLoader)"><img class="cover" src="/img/67861832_p0.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2022-06-08</div><div class="info-item-2">抓取安卓端FGO游戏数据并导入素材规划软件Chaldea教程(需解锁BootLoader)</div></div><div class="info-2"><div class="info-item-1">更新 Android 12 系统之后，证书不让安装为 root 证书了，SSL Pinning 也来了，老办法抓不到数据了，于是经过一番摸索，写下了本文，本文理论上适用于所有 APP，不仅仅是 FGO 第一步   参照以下文章安装 Magisk   https://sekibetu.com/magisk01.html   第二步   参照以下文章的第二步，在 Magisk 中刷入对应 Zygisk 版本的 LSPosed 框架   https://sekibetu.com/tiktok01.html   第三步   下载 MagiskTrustUserCerts 并在 Magisk 中刷入   重启手机   第四步  安装 JustTrustMe 模块(用来绕过 SSL Pinning)，并在 LSPosed 中启用，模块作用域指定为 FGO    第五步   下载安装 Fiddler Classic 或 mitmproxy   启动 Fiddler Classic 或 mitmproxy 并进行一些基础设置，以下是 Fiddler Classic 的基础设置， mitmprox...</div></div></div></a></div></div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div><div class="comment-switch"><span class="first-comment">Utterances</span><span id="switch-btn"></span><span class="second-comment">Giscus</span></div></div><div class="comment-wrap"><div><div id="utterances-wrap"></div></div><div><div id="giscus-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/SekiBetu.png" onerror="this.onerror=null;this.src='/img/Starfetcher.jpg'" alt="avatar"/></div><div class="author-info-name">SekiBetu</div><div class="author-info-description">记录与分享各种东西</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">18</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">27</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/SekiBetu"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://twitter.com/_SekiBetu_" target="_blank" title="Twitter"><i class="fab fa-twitter"></i></a><a class="social-icon" href="mailto:realsekibetu@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="https://sekibetu.com/atom.xml" target="_blank" title="RSS"><i class="fas fa-rss"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content is-expand"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E6%AD%A5"><span class="toc-number">1.</span> <span class="toc-text">第一步</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E6%AD%A5"><span class="toc-number">2.</span> <span class="toc-text">第二步</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/linus01.html" title="对Linux社区封禁俄罗斯开发者且linus本人支持这一行为的评价">对Linux社区封禁俄罗斯开发者且linus本人支持这一行为的评价</a><time datetime="2024-10-24T13:54:15.000Z" title="发表于 2024-10-24 21:54:15">2024-10-24</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/followis.html" title="三分钟，让Follow认证我的Hexo博客订阅源">三分钟，让Follow认证我的Hexo博客订阅源</a><time datetime="2024-10-14T12:04:50.000Z" title="发表于 2024-10-14 20:04:50">2024-10-14</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/rss01.html" title="给 Hexo 博客加上 PubSubHubbub 协议实现 RSS 实时推送">给 Hexo 博客加上 PubSubHubbub 协议实现 RSS 实时推送</a><time datetime="2022-06-29T21:55:05.000Z" title="发表于 2022-06-30 05:55:05">2022-06-30</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/sniff01.html" title="抓取安卓端FGO游戏数据并导入素材规划软件Chaldea教程(需解锁BootLoader)">抓取安卓端FGO游戏数据并导入素材规划软件Chaldea教程(需解锁BootLoader)</a><time datetime="2022-06-08T11:58:22.000Z" title="发表于 2022-06-08 19:58:22">2022-06-08</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/ssh01.html" title="SSH客户端简单对比">SSH客户端简单对比</a><time datetime="2022-06-07T14:37:06.000Z" title="发表于 2022-06-07 22:37:06">2022-06-07</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url(/img/67861832_p0.jpg);"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2020 - 2025 By SekiBetu</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 8.1.1</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.3</a></span></div><div class="footer_custom_text"><a href="https://icp.gov.moe/?keyword=20213842" target="_blank">萌ICP备20213842号</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="前往评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.3"></script><script src="/js/main.js?v=5.5.3"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar@0.1.16/dist/snackbar.min.js"></script><div class="js-pjax"><script>(() => {
+  const isShuoshuo = GLOBAL_CONFIG_SITE.pageType === 'shuoshuo'
+  const option = null
+  const getUtterancesTheme = theme => theme === 'dark' ? 'github-dark' : 'github-light'
+
+  const loadUtterances = (el = document, key) => {
+    if (isShuoshuo) {
+      window.shuoshuoComment.destroyUtterances = () => {
+        if (el.children.length) {
+          el.innerHTML = ''
+          el.classList.add('no-comment')
+        }
+      }
+    }
+
+    const config = {
+      src: 'https://utteranc.es/client.js',
+      repo: 'SekiBetu/BlogComments',
+      theme: getUtterancesTheme(document.documentElement.getAttribute('data-theme')),
+      crossorigin: 'anonymous',
+      async: true,
+      ...option,
+      'issue-term': isShuoshuo ? key : (option && option['issue-term']) || 'title'
+    }
+
+    const ele = document.createElement('script')
+    Object.entries(config).forEach(([key, value]) => ele.setAttribute(key, value))
+    el.querySelector('#utterances-wrap').appendChild(ele)
+  }
+
+  const changeUtterancesTheme = theme => {
+    const iframe = document.querySelector('#utterances-wrap iframe')
+    if (iframe) {
+      const message = {
+        type: 'set-theme',
+        theme: getUtterancesTheme(theme)
+      };
+      iframe.contentWindow.postMessage(message, 'https://utteranc.es')
+    }
+  }
+
+  btf.addGlobalFn('themeChange', changeUtterancesTheme, 'utterances')
+
+  if (isShuoshuo) {
+    'Utterances' === 'Utterances'
+      ? window.shuoshuoComment = { loadComment: loadUtterances }
+      : window.loadOtherComment = loadUtterances
+    return
+  }
+  
+  if ('Utterances' === 'Utterances' || !false) {
+    if (false) btf.loadComment(document.getElementById('utterances-wrap'), loadUtterances)
+    else loadUtterances()
+  } else {
+    window.loadOtherComment = loadUtterances
+  }
+})()</script><script>(() => {
+  const isShuoshuo = GLOBAL_CONFIG_SITE.pageType === 'shuoshuo'
+  const option = null
+
+  const getGiscusTheme = theme => theme === 'dark' ? 'dark' : 'light'
+
+  const createScriptElement = config => {
+    const ele = document.createElement('script')
+    Object.entries(config).forEach(([key, value]) => {
+      ele.setAttribute(key, value)
+    })
+    return ele
+  }
+
+  const loadGiscus = (el = document, key) => {
+    const mappingConfig = isShuoshuo
+      ? { 'data-mapping': 'specific', 'data-term': key }
+      : { 'data-mapping': (option && option['data-mapping']) || 'pathname' }
+
+    const giscusConfig = {
+      src: 'https://giscus.app/client.js',
+      'data-repo': 'SekiBetu/BlogComments',
+      'data-repo-id': 'MDEwOlJlcG9zaXRvcnk0MDU2MzIxMzY=',
+      'data-category-id': 'DIC_kwDOGC10iM4CPwsn',
+      'data-theme': getGiscusTheme(document.documentElement.getAttribute('data-theme')),
+      'data-reactions-enabled': '1',
+      crossorigin: 'anonymous',
+      async: true,
+      ...option,
+      ...mappingConfig
+    }
+
+    const scriptElement = createScriptElement(giscusConfig)
+
+    el.querySelector('#giscus-wrap').appendChild(scriptElement)
+
+    if (isShuoshuo) {
+      window.shuoshuoComment.destroyGiscus = () => {
+        if (el.children.length) {
+          el.innerHTML = ''
+          el.classList.add('no-comment')
+        }
+      }
+    }
+  }
+
+  const changeGiscusTheme = theme => {
+    const iframe = document.querySelector('#giscus-wrap iframe')
+    if (iframe) {
+      const message = {
+        giscus: {
+          setConfig: {
+            theme: getGiscusTheme(theme)
+          }
+        }
+      }
+      iframe.contentWindow.postMessage(message, 'https://giscus.app')
+    }
+  }
+
+  btf.addGlobalFn('themeChange', changeGiscusTheme, 'giscus')
+
+  if (isShuoshuo) {
+    'Utterances' === 'Giscus'
+      ? window.shuoshuoComment = { loadComment: loadGiscus }
+      : window.loadOtherComment = loadGiscus
+    return
+  }
+
+  if ('Utterances' === 'Giscus' || !false) {
+    if (false) btf.loadComment(document.getElementById('giscus-wrap'), loadGiscus)
+    else loadGiscus()
+  } else {
+    window.loadOtherComment = loadGiscus
+  }
+})()</script></div><div class="aplayer no-destroy" data-id="18480" data-server="netease" data-type="artist" data-fixed="true" data-mini="true" data-order="random" data-preload="metadata" data-autoplay="true" data-lrctype="3"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/metingjs/dist/Meting.min.js"></script><script>(() => {
+  const destroyAplayer = () => {
+    if (window.aplayers) {
+      for (let i = 0; i < window.aplayers.length; i++) {
+        if (!window.aplayers[i].options.fixed) {
+          window.aplayers[i].destroy()
+        }
+      }
+    }
+  }
+
+  const runMetingJS = () => {
+    typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+  }
+
+  btf.addGlobalFn('pjaxSend', destroyAplayer, 'destroyAplayer')
+  btf.addGlobalFn('pjaxComplete', loadMeting, 'runMetingJS')
+})()</script><script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.min.js" defer="defer"></script><script>document.addEventListener('DOMContentLoaded', () => {
+  const pjaxSelectors = ["meta[property=\"og:image\"]","meta[property=\"og:title\"]","meta[property=\"og:url\"]","meta[property=\"og:description\"]","link[rel=\"canonical\"]","head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+  window.pjax = new Pjax({
+    elements: 'a:not([target="_blank"])',
+    selectors: pjaxSelectors,
+    cacheBust: false,
+    analytics: false,
+    scrollRestoration: false
+  })
+
+  const triggerPjaxFn = (val) => {
+    if (!val) return
+    Object.values(val).forEach(fn => {
+      try {
+        fn()
+      } catch (err) {
+        console.debug('Pjax callback failed:', err)
+      }
+    })
+  }
+
+  document.addEventListener('pjax:send', () => {
+    // removeEventListener
+    btf.removeGlobalFnEvent('pjaxSendOnce')
+    btf.removeGlobalFnEvent('themeChange')
+
+    // reset readmode
+    const $bodyClassList = document.body.classList
+    if ($bodyClassList.contains('read-mode')) $bodyClassList.remove('read-mode')
+
+    triggerPjaxFn(window.globalFn.pjaxSend)
+  })
+
+  document.addEventListener('pjax:complete', () => {
+    btf.removeGlobalFnEvent('pjaxCompleteOnce')
+    document.querySelectorAll('script[data-pjax]').forEach(item => {
+      const newScript = document.createElement('script')
+      const content = item.text || item.textContent || item.innerHTML || ""
+      Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+      newScript.appendChild(document.createTextNode(content))
+      item.parentNode.replaceChild(newScript, item)
+    })
+
+    triggerPjaxFn(window.globalFn.pjaxComplete)
+  })
+
+  document.addEventListener('pjax:error', e => {
+    if (e.request.status === 404) {
+      true
+        ? pjax.loadUrl('/404.html')
+        : window.location.href = e.request.responseURL
+    }
+  })
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

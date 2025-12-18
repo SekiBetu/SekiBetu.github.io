@@ -1,0 +1,5 @@
+/* 自定义字体 */
+@font-face{
+    font-family: 'JetBrains Mono';
+    src: url('../font/JetBrainsMonoNL-Regular.ttf');
+}
